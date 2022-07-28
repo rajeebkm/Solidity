@@ -24,6 +24,8 @@
 pragma solidity ^0.8.13;
 
 contract ReceiveEther {
+
+event Log(uint amount, uint gas);  //To track amount of ether receive, and amount of gas receive and left while executing receive() function.
     /*
     Which function is called, fallback() or receive()?
 
@@ -41,10 +43,14 @@ receive() exists?  fallback()
     */
 
     // Function to receive Ether. msg.data must be empty
-    receive() external payable {}
+    receive() external payable {
+    emit Log(msg.value, gasLeft());  //gasLeft() gives us the amount of gas left after executing receive() function.
+    }
 
     // Fallback function is called when msg.data is not empty
     fallback() external payable {}
+       // send / transfer (forwards 2300 gas to this fallback function)
+        // call (forwards all of the gas)
 
     function getBalance() public view returns (uint) {
         return address(this).balance;
@@ -53,7 +59,7 @@ receive() exists?  fallback()
 
 contract SendEther {
     function sendViaTransfer(address payable _to) public payable {
-        // This function is no longer recommended for sending Ether.
+        // This function is no longer recommended for sending Ether. 
         _to.transfer(msg.value);
     }
 
@@ -70,4 +76,6 @@ contract SendEther {
         (bool sent, bytes memory data) = _to.call{value: msg.value}("");
         require(sent, "Failed to send Ether");
     }
+    
+       
 }
