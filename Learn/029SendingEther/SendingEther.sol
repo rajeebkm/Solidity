@@ -44,7 +44,7 @@ receive() exists?  fallback()
 
     // Function to receive Ether. msg.data must be empty
     receive() external payable {
-    emit Log(msg.value, gasLeft());  //gasLeft() gives us the amount of gas left after executing receive() function.
+    emit Log(msg.value, gasleft());  //gasLeft() gives us the amount of gas left after executing receive() function.
     }
 
     // Fallback function is called when msg.data is not empty
