@@ -1,19 +1,41 @@
 // Merkle Tree
-// Merkle tree allows you to cryptographically prove that an element (transaction) is contained in a set (block) without revealing the entire set (transactions).
+// Merkle tree allows you to cryptographically prove that an element (transaction) is contained in a set (block) without revealing the entire
+set (transactions).
 
 //Tree that grows our cryptocurrencies like Bitcoin and Ethereum
 
-//To construct a Merkle Tree, we first start with a non-empty array. For simplicity, we're going to assume that the length of the array is a power of 2. Example:Length of the array can be 2 or, 4, or, 8 and so on..Why we need an array with a length as power of 2 ?
+/* To construct a Merkle Tree, we first start with a non-empty array. For simplicity, we're going to assume that the length of the array is a powerof 2. 
+Example:Length of the array can be 2 or, 4, or, 8 and so on..Why we need an array with a length as power of 2 ? */
 
-//For each element in the array, we're gonna compute the cryptographic hash of the element and then store it in a new array. From the array of hashes, we take the first two elementand then compute the hash, we take next two element, and compute the hash, and we continue the process untill we computed the hash of the last two elements. Eventually, we will get a single hash, called root hash. This is how we construct the Merkle Tree. If number of elements in the original array is not the power of 2, then at some point of Merkle Tree construction, there will be an odd number of computed hashes. 
+/* For each element in the array, we're gonna compute the cryptographic hash of the element and then store it in a new array. From the array of hashes,
+we take the first two elementand then compute the hash, we take next two element, and compute the hash, and we continue the process untill we computed 
+the hash of the last two elements. Eventually, we will get a single hash, called root hash. This is how we construct the Merkle Tree. If number of 
+elements in the original array is not the power of 2, then at some point of Merkle Tree construction, there will be an odd number of computed hashes. 
+*/
 
-// For example: If we start with 6 elements, then we'll get 3 hashes after computing hash of the pairs. And we cann't compute the next level of hashes since we need 4 hashes, but there is only 3 hashes present. If there are odd number of hashes, then the trick to compute the next level of hashes is to duplicate the last element and then compute the hash of the duplicates. This is like filling the tail end of the array with duplicates so that length of the array becomes the power of 2.
+/* For example: If we start with 6 elements, then we'll get 3 hashes after computing hash of the pairs. And we cann't compute the next level of hashes 
+since we need 4 hashes, but there is only 3 hashes present. If there are odd number of hashes, then the trick to compute the next level of hashes is to 
+duplicate the last element and then compute the hash of the duplicates. This is like filling the tail end of the array with duplicates so that length of 
+the array becomes the power of 2. 
+*/
 
-//So, how is a Merkle Tree useful ? One application is: We can create a cryptographic proof that a transaction was included in a block. Imagine there are bunch of transactions that are waiting to be included in a block. To create a cryptographic proof that these pending transactions are included in the next block. We first create the Merkle Tree from these transactions and we include the Merkle root hash into the block.
+/* So, how is a Merkle Tree useful ? One application is: We can create a cryptographic proof that a transaction was included in a block. Imagine there
+are bunch of transactions that are waiting to be included in a block. To create a cryptographic proof that these pending transactions are included in
+the next block. We first create the Merkle Tree from these transactions and we include the Merkle root hash into the block.
+*/
 
-//  Now, if Alice wants to know if her transaction (3rd element) was included in the block, all she has to do is get these 4 hashes (from 8 hashes, 4 hashes, then 2, then 1). Now From base 8 hashes, take 3rd element (index 2, hash 1) & 4th element (index 3, hash 2, proof 1), from 1st level 4 hashes take, first hashes (index 0, hash 3, proof 2), and finally take last hashes (index 1, hash 4, proof 3) from 2nd level and compute merkle root hash), we compute the Merkle root hash and compared to the Merkle root hash that was commited to the block. If two merkle root hashes are matched, then she  knows that her transaction was included in the block.
+/* Now, if Alice wants to know if her transaction (3rd element) was included in the block, all she has to do is get these 4 hashes (from 8 hashes,
+4 hashes, then 2, then 1). Now From base 8 hashes, take 3rd element (index 2, hash 1) & 4th element (index 3, hash 2, proof 1), from 1st level 4 hashes 
+take, first hashes (index 0, hash 3, proof 2), and finally take last hashes (index 1, hash 4, proof 3) from 2nd level and compute merkle root hash),
+we compute the Merkle root hash and compared to the Merkle root hash that was commited to the block. If two merkle root hashes are matched, then she 
+knows that her transaction was included in the block.
+*/
 
-//Another way to create a proof that a transaction was included in a block is to concatenate all the transaction data and create a single hash from it. The problem with this approach is that in order to recompute the hash, we need the all of the transaction data, so if there was 1000 transactions in a block and Alice wants to know if her transaction was included in the block, then she'll have to download all 1000 transactions and then compute the hash. However using the Merkle Tree, she only need log2(100) < 10 hashes (about)
+/* Another way to create a proof that a transaction was included in a block is to concatenate all the transaction data and create a single hash from it.
+The problem with this approach is that in order to recompute the hash, we need the all of the transaction data, so if there was 1000 transactions in a 
+block and Alice wants to know if her transaction was included in the block, then she'll have to download all 1000 transactions and then compute the hash.
+However using the Merkle Tree, she only need log2(100) < 10 hashes (about)
+*/
 
 
 // SPDX-License-Identifier: MIT
