@@ -1,8 +1,9 @@
 // Merkle Tree
-// Merkle tree allows you to cryptographically prove that an element (transaction) is contained in a set (block) without revealing the entire
+/ Merkle tree allows you to cryptographically prove that an element (transaction) is contained in a set (block) without revealing the entire
 set (transactions).
+*/
 
-//Tree that grows our cryptocurrencies like Bitcoin and Ethereum
+/* Tree that grows our cryptocurrencies like Bitcoin and Ethereum */
 
 /* To construct a Merkle Tree, we first start with a non-empty array. For simplicity, we're going to assume that the length of the array is a powerof 2. 
 Example:Length of the array can be 2 or, 4, or, 8 and so on..Why we need an array with a length as power of 2 ? */
