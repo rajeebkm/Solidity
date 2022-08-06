@@ -1,7 +1,6 @@
 // Merkle Tree
-/ Merkle tree allows you to cryptographically prove that an element (transaction) is contained in a set (block) without revealing the entire
-set (transactions).
-*/
+// Merkle tree allows you to cryptographically prove that an element (transaction) is contained in a set (block) without revealing the entire set 
+// (transactions).
 
 /* Tree that grows our cryptocurrencies like Bitcoin and Ethereum */
 
