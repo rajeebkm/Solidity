@@ -69,6 +69,8 @@ truffle(development)> store3.setValue('My Third Store')
 truffle(development)> store3.value()
 'My Third Store'
 
+*/
+
 
 
 
